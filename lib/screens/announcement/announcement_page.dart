@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,10 +40,26 @@ class _AnnouncementPageState extends State<AnnouncementPage> {
                       onTap: () async {
                         try {
                           await controller.delete(anm.id);
+                          if (!mounted) return;
+
+                          //mounted = true
+                          // !mounted = false
+                          if (!mounted) return; //หน้านี้ไม่อยู่แล้วหรือปิดไปแล้ว จะจบฟังก์ชันเลย
+
+                          //ถ้าหน้านี้ยังอยู่หรือไม่ถูกปิด จะทำในวงเล็บ
+                          if (mounted) {
+                            //แสดงข้อความ "สำเร็จ"
+                          }
                         } on Exception catch (e) {
-                          showDialog(context: context, builder: (context) {
-                            return AlertDialog(title: Text('ผิดพลาด'),content: Text(e.toString()),);
-                          },);
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('ผิดพลาด'),
+                                content: Text(e.toString()),
+                              );
+                            },
+                          );
                         }
                       },
                       child: Icon(Icons.delete),
