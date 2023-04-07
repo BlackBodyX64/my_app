@@ -47,13 +47,38 @@ class _RegisterPageState extends State<RegisterPage> {
               Divider(),
               // ...List.generate(images.length, (index) => Text(images[index].toString())),
               Column(
-                children: List.generate(images.length, (index) => Text(images[index].toString())),
+                children: List.generate(images.length, (index) {
+                  return ListTile(
+                    title: Text(
+                      index.toString(),
+                    ),
+                    trailing: InkWell(
+                      onTap: () async {
+                        try {
+                          await AnnouncementService().deleteAnnouncement(id: index.toString());
+                        } catch (e) {
+                          // print(e);
+                          showDialog(context: context, builder: (context) {
+                            return AlertDialog(title: Text('ผิดพลาด'),content: Text(e.toString()),);
+                          },);
+                        }
+                      },
+                      child: Icon(Icons.delete),
+                    ),
+                  );
+
+                  // Row(
+                  // children: [
+                  //   Text(images[index].toString()),
+                  //   IconButton(onPressed: (){}, icon: Icon(Icons.delete))
+                  // ],
+                }),
               ),
               Divider(),
               IconButton(
                 onPressed: () {
                   // Announcement().createGallary(cover: 'cover', title: 'title', images: images);
-                  Announcement().updateAnnouncement(id: 1, announcementType: 'news');
+                  AnnouncementService().updateAnnouncement(id: 1, announcementType: 'news');
                 },
                 icon: Icon(Icons.save),
               ),

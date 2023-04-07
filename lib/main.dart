@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/announcement/announcement_controller.dart';
 import 'package:my_app/screens/login_page.dart';
 import 'package:my_app/screens/post/post_controller.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => PostController()),
+        ChangeNotifierProvider(create: (_) => AnnouncementController()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

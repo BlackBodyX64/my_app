@@ -4,9 +4,27 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 import 'package:my_app/constrant.dart';
+import 'package:my_app/models/announcement.dart';
 
-class Announcement {
-  Announcement();
+class AnnouncementService {
+  AnnouncementService();
+
+  Future<List<Announcement>> getList() async {
+    final url = Uri.parse('$baseUrl/api/announcement');
+    final response = await http.get(url);
+
+    //สำเร็จ
+    if (response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
+
+      final List list = data['data'];
+
+      return list.map((e) => Announcement.fromJson(e)).toList();
+    } else {
+      //Error
+      throw Exception('ไม่สำเร็จ');
+    }
+  }
 
   Future createAnnouncement({
     required String title,
@@ -80,12 +98,12 @@ class Announcement {
   }
 
   Future deleteAnnouncement({
-    required int id,
+    required String id,
   }) async {
     final url = Uri.parse('$baseUrl/api/announcement/$id');
 
     final headers = {
-      "Authorization": "Bearer token",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzMjkwNzY2OS05ODE1LTQ3Y2YtOWJjYS0xY2JmMmQwYWMxYWIiLCJ0eXAiOiJhZG1pbiIsImlhdCI6MTY4MDg3NjAwNCwiZXhwIjoxNjgwODc5NjA0fQ.qrVA7LvEbi17ZsP6tQGjn1w4_FPoFdsgSBYAnU6U9mQ",
       'Content-Type': 'application/json',
     };
 
@@ -96,7 +114,8 @@ class Announcement {
 
     } else {
       //Error
-      throw Exception('ไม่สำเร็จ');
+      final data = convert.jsonDecode(response.body);
+      throw Exception(data['message']);
     }
   }
 

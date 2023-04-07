@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/announcement/announcement_page.dart';
 import 'package:my_app/screens/post/post_list_page.dart';
 import 'package:my_app/screens/register_page.dart';
 
@@ -33,6 +34,13 @@ class _LoginPageState extends State<LoginPage> {
                     MaterialPageRoute(builder: (context) => RegisterPage()));
               },
               child: Text('Register')),
+              Divider(),
+              TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AnnouncementPage()));
+              },
+              child: Text('Announcement')),
         ],
       ),
     );
