@@ -103,7 +103,7 @@ class AnnouncementService {
     final url = Uri.parse('$baseUrl/api/announcement/$id');
 
     final headers = {
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzMjkwNzY2OS05ODE1LTQ3Y2YtOWJjYS0xY2JmMmQwYWMxYWIiLCJ0eXAiOiJhZG1pbiIsImlhdCI6MTY4MDg3NjAwNCwiZXhwIjoxNjgwODc5NjA0fQ.qrVA7LvEbi17ZsP6tQGjn1w4_FPoFdsgSBYAnU6U9mQ",
+      "Authorization": "Bearer token",
       'Content-Type': 'application/json',
     };
 
