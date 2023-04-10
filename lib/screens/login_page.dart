@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/announcement/announcement_page.dart';
 import 'package:my_app/screens/post/post_list_page.dart';
+import 'package:my_app/screens/register_app_page.dart';
 import 'package:my_app/screens/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -41,6 +42,13 @@ class _LoginPageState extends State<LoginPage> {
                     MaterialPageRoute(builder: (context) => AnnouncementPage()));
               },
               child: Text('Announcement')),
+              Divider(),
+              TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RegisterAppPage()));
+              },
+              child: Text('Register App')),
         ],
       ),
     );
